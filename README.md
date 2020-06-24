@@ -2,6 +2,11 @@
 
 Test bed for WebSockets application
 
+
+## Getting Started
+
+### Running the Application
+
 ## Setup
 
 ### Creation from Archetype
@@ -21,15 +26,38 @@ mvn archetype:generate \
 There is a glitch in the archetype plugin where it always creates a directory for the artifactId, by setting the 
 output to be one level up it effectively uses the current working directory if it's named the same.
 
+Also the template project needs the Spring Boot version increasing to, in this case, `2.3.1.RELEASE`.  
+On doing this the two tests provided will break, just delete them.
+
 
 ## References
 
+### Maven
 
 * [Maven directory layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
 * [Logback](https://www.baeldung.com/logback)
 * [Maven archetype quickstart](https://maven.apache.org/archetypes/maven-archetype-quickstart/)
+* [Spring boot maven plugin](https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/html/)
+
+
+### Spring Boot
+
 * [Spring boot example](https://spring.io/guides/gs/spring-boot/)
 * [Serving static content](https://spring.io/blog/2013/12/19/serving-static-web-content-with-spring-boot)
+* [Spring Task Executor](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/scheduling.html)
+* [Testing spring web applications](https://spring.io/guides/gs/testing-web/)
+* [Unit testing spring boot apps](https://reflectoring.io/unit-testing-spring-boot/)
+
+### WebSockets
+
+* [Browser WebSocket example](https://javascript.info/websocket)
+
+
+### HTML
+
 * [HTML Doctype](https://www.w3schools.com/tags/tag_doctype.asp)
 
 
+### Java
+
+* [Creating logger without using class name](https://stackoverflow.com/questions/5271016/java-self-static-reference)

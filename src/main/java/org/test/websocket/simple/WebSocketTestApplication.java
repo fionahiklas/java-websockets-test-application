@@ -16,19 +16,22 @@
 
 package org.test.websocket.simple;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import org.test.websocket.simple.service.HelloWorldService;
 
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan
+@SpringBootApplication
 public class WebSocketTestApplication implements CommandLineRunner {
+
+	private static final Logger log = LoggerFactory.getLogger(WebSocketTestApplication.class);
 
 	// Simple example shows how a command line spring application can execute an
 	// injected bean service. Also demonstrates how you can use @Value to inject
