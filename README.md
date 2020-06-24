@@ -29,5 +29,7 @@ output to be one level up it effectively uses the current working directory if i
 * [Logback](https://www.baeldung.com/logback)
 * [Maven archetype quickstart](https://maven.apache.org/archetypes/maven-archetype-quickstart/)
 * [Spring boot example](https://spring.io/guides/gs/spring-boot/)
+* [Serving static content](https://spring.io/blog/2013/12/19/serving-static-web-content-with-spring-boot)
+* [HTML Doctype](https://www.w3schools.com/tags/tag_doctype.asp)
 
 
