@@ -1,15 +1,15 @@
 package org.test.websocket.simple.controllers;
 
-import org.springframework.stereotype.Controller;
-
-import org.springframework.web.bind.annotation.Mapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.test.websocket.simple.responses.WebsocketMonitorResponse;
 
 
-@Controller
+@RestController
 public class MonitorController {
 
-
-
+    @RequestMapping("/monitor")
+    public WebsocketMonitorResponse monitor() {
+        return new WebsocketMonitorResponse(0);
+    }
 }

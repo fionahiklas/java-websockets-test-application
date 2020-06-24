@@ -28,8 +28,6 @@ output to be one level up it effectively uses the current working directory if i
 * [Maven directory layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
 * [Logback](https://www.baeldung.com/logback)
 * [Maven archetype quickstart](https://maven.apache.org/archetypes/maven-archetype-quickstart/)
-* [Spring boot example](import org.springframework.web.bind.annotation.Mapping;
-)
-
+* [Spring boot example](https://spring.io/guides/gs/spring-boot/)
 
 
