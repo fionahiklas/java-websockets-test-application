@@ -25,12 +25,12 @@ import org.springframework.boot.test.OutputCapture;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Tests for {@link SampleSimpleApplication}.
+ * Tests for {@link WebSocketTestApplication}.
  * 
  * @author Dave Syer
  * @author Phillip Webb
  */
-public class SampleSimpleApplicationTests {
+public class WebSocketTestApplicationTests {
 
 	@Rule
 	public OutputCapture outputCapture = new OutputCapture();
@@ -54,14 +54,14 @@ public class SampleSimpleApplicationTests {
 
 	@Test
 	public void testDefaultSettings() throws Exception {
-		SampleSimpleApplication.main(new String[0]);
+		WebSocketTestApplication.main(new String[0]);
 		String output = this.outputCapture.toString();
 		assertTrue("Wrong output: " + output, output.contains("Hello Phil"));
 	}
 
 	@Test
 	public void testCommandLineOverrides() throws Exception {
-		SampleSimpleApplication.main(new String[] { "--name=Gordon" });
+		WebSocketTestApplication.main(new String[] { "--name=Gordon" });
 		String output = this.outputCapture.toString();
 		assertTrue("Wrong output: " + output, output.contains("Hello Gordon"));
 	}

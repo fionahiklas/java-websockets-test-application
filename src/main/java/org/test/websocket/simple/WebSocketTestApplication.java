@@ -28,7 +28,7 @@ import org.test.websocket.simple.service.HelloWorldService;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class SampleSimpleApplication implements CommandLineRunner {
+public class WebSocketTestApplication implements CommandLineRunner {
 
 	// Simple example shows how a command line spring application can execute an
 	// injected bean service. Also demonstrates how you can use @Value to inject
@@ -43,6 +43,6 @@ public class SampleSimpleApplication implements CommandLineRunner {
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleSimpleApplication.class, args);
+		SpringApplication.run(WebSocketTestApplication.class, args);
 	}
 }
