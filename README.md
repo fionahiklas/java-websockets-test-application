@@ -53,12 +53,21 @@ On doing this the two tests provided will break, just delete them.
 
 * [Browser WebSocket example](https://javascript.info/websocket)
 
+### Java Management Extensions
+
+* [Spring MBean annotations](https://www.logicbig.com/tutorials/spring-framework/spring-integration/annotation-based-spring-jmx-integration.html)
+
 
 ### HTML
 
 * [HTML Doctype](https://www.w3schools.com/tags/tag_doctype.asp)
+* [Spring JMX](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/jmx.html#jmx-interface-metadata)
 
 
 ### Java
 
+* [Project lombok maven setup](https://projectlombok.org/setup/maven)
+* [Project lombok logging](https://projectlombok.org/features/log)
 * [Creating logger without using class name](https://stackoverflow.com/questions/5271016/java-self-static-reference)
+* [Unit tests with Mockito](https://www.vogella.com/tutorials/Mockito/article.html)
+

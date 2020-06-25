@@ -24,4 +24,6 @@ public class PingPongWebSocketHandler extends TextWebSocketHandler {
         log.debug("handle Text Message");
         super.handleTextMessage(session, message);
     }
+
+
 }
