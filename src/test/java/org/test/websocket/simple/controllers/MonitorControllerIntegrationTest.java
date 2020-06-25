@@ -18,7 +18,6 @@ public class MonitorControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
-
     @Test
     public void testMonitorReturnsCount() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/monitor"))

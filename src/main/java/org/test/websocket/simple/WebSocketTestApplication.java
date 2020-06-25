@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 the original author or authors.
+ * Copyright 2020 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@
 
 package org.test.websocket.simple;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,10 +27,9 @@ import org.springframework.context.annotation.Configuration;
 
 import org.test.websocket.simple.service.HelloWorldService;
 
+@Slf4j
 @SpringBootApplication
 public class WebSocketTestApplication implements CommandLineRunner {
-
-	private static final Logger log = LoggerFactory.getLogger(WebSocketTestApplication.class);
 
 	// Simple example shows how a command line spring application can execute an
 	// injected bean service. Also demonstrates how you can use @Value to inject
@@ -42,7 +40,7 @@ public class WebSocketTestApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		System.out.println(this.helloWorldService.getHelloMessage());
+		log.debug(this.helloWorldService.getHelloMessage());
 	}
 
 	public static void main(String[] args) throws Exception {
