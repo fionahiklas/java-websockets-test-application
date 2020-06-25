@@ -42,6 +42,7 @@ On doing this the two tests provided will break, just delete them.
 
 ### Spring Boot
 
+* [Spring API documentation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/s)
 * [Spring boot example](https://spring.io/guides/gs/spring-boot/)
 * [Serving static content](https://spring.io/blog/2013/12/19/serving-static-web-content-with-spring-boot)
 * [Spring Task Executor](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/scheduling.html)
