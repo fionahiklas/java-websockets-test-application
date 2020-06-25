@@ -1,17 +1,17 @@
 package org.test.websocket.simple.mbeans;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 @ManagedResource
 public class ExampleMBean {
 
-    private Integer totalCount;
+    private Integer totalCount = 0;
     private String message = "Default message";
 
     @ManagedAttribute
