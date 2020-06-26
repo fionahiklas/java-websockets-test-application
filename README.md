@@ -52,6 +52,7 @@ On doing this the two tests provided will break, just delete them.
 ### WebSockets
 
 * [Browser WebSocket example](https://javascript.info/websocket)
+* [Spring WebSockets and STOMP](https://spring.io/guides/gs/messaging-stomp-websocket/)
 
 ### Java Management Extensions
 

@@ -1,6 +1,5 @@
 package org.test.websocket.simple.websockets;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +23,7 @@ public class PingPongWebSocketConfigurer implements WebSocketConfigurer {
         log.debug("Configuring websockets");
 
         webSocketHandlerRegistry
-                .addHandler(handler, "pingpong")
+                .addHandler(handler, "/pingpong")
                 .addInterceptors(interceptor);
     }
 }

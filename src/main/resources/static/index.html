@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="websockets_client.js"></script>
         <title>WebSockets Test Page</title>
     </head>
     <body>
         <h1>WebSockets Test Page</h1>
-        <div>Connection Count</div>
-        <div></div>
+        <div>Connection Count</div><div id="count"></div>
+
+        <h1>Messages</h1>
+        <div>
+            <button id="connectButton">Connect</button>
+            <button id="disconnectButton">Disconnect</button>
+            <p>Status: <div id="connectionStatus"></div></p>
+        </div>
+        <div>
+            <textarea id="messageOut"></textarea>
+            <button id="submitMessage">Submit</button>
+            <textarea id="messageResponse"></textarea>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function(){
+                console.log("Document ready, registering the handlers");
+                let websocketClient = WebSocketClient();
+
+                let connectionStatus = document.getElementById("connectionStatus");
+                let connectButton = document.getElementById("connectButton");
+                connectButton.addEventListener("click", function() {
+                    console.log("About to connect to websocket");
+                    websocketClient.openWebSocket("ws://" + window.location.host + "/pingpong")
+                });
+
+                let disconnectButton = document.getElementById("connectButton");
+                disconnectButton.addEventListener("click", function() {
+                    console.log("About to disconnect the websocket");
+                    websocketClient.closeWebSocket();
+                });
+
+                console.log("All done.");
+            });
+        </script>
     </body>
 </html>
