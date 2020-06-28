@@ -55,6 +55,8 @@ On doing this the two tests provided will break, just delete them.
 * [Spring Task Executor](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/scheduling.html)
 * [Testing spring web applications](https://spring.io/guides/gs/testing-web/)
 * [Unit testing spring boot apps](https://reflectoring.io/unit-testing-spring-boot/)
+* [Spring properties](https://www.baeldung.com/properties-with-spring)
+* [Spring value annotation](https://www.baeldung.com/spring-value-annotation)
 
 
 ### WebSockets
