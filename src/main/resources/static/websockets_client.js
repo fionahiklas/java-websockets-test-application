@@ -1,9 +1,13 @@
 
+console.log("Creating constructor");
 function WebSocketsClient() {
     console.log("Creating WebSocket Client");
 }
 
-let extend = WebSocketsClient.prototype;
+console.log("Getting prototype");
+var extend = WebSocketsClient.prototype;
+
+console.log("Extending prototype");
 
 extend.openWebSocket = function(websocketURL) {
     console.log("Creating websocket for URL: ", websocketURL);
@@ -29,4 +33,5 @@ extend.openWebSocket = function(websocketURL) {
 extend.closeWebSocket = function() {
     console.log("Closing websocket");
     this.socket.close();
+    this.socket = null;
 }

@@ -7,6 +7,13 @@ Test bed for WebSockets application
 
 ### Running the Application
 
+```
+mvn clean spring-boot:run
+```
+
+The application listens on port 8080 by default
+
+
 ## Setup
 
 ### Creation from Archetype
@@ -57,12 +64,21 @@ On doing this the two tests provided will break, just delete them.
 ### Java Management Extensions
 
 * [Spring MBean annotations](https://www.logicbig.com/tutorials/spring-framework/spring-integration/annotation-based-spring-jmx-integration.html)
+* Dropwizard (an alternative to Spring Boot) has a metrics library
+ * This includes a Histogram JMX bean 
+ * [Dropwizard Histogram Metrics](https://github.com/dropwizard/metrics/blob/release/4.1.x/metrics-jmx/src/main/java/com/codahale/metrics/jmx/JmxReporter.java)
+ * This code uses the underlying [Histogram class](https://github.com/dropwizard/metrics/blob/39fe8e8e1ce82516ad6ec6cdbf18a71f23eff6bb/metrics-core/src/main/java/com/codahale/metrics/Histogram.java)
+ * That can store data in a [Uniform Reservoir](https://github.com/dropwizard/metrics/blob/39fe8e8e1ce82516ad6ec6cdbf18a71f23eff6bb/metrics-core/src/main/java/com/codahale/metrics/UniformReservoir.java)
+ * The calculations for min/max/percentiles are carried out in the app and surfaced with JMX as final values as well as an array of data
+* The Dropwizard metrics are used by [Cassandra](https://murukeshm.github.io/cassandra/3.10/operating/metrics.html)
+* [Spring JMX](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/jmx.html#jmx-interface-metadata)
 
-
+ 
 ### HTML
 
 * [HTML Doctype](https://www.w3schools.com/tags/tag_doctype.asp)
-* [Spring JMX](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/jmx.html#jmx-interface-metadata)
+* [JavaScript location](https://www.tutorialrepublic.com/javascript-tutorial/javascript-window-location.php)
+* [JavaScript load order](http://xahlee.info/js/js_executing_order.html)
 
 
 ### Java
@@ -71,4 +87,6 @@ On doing this the two tests provided will break, just delete them.
 * [Project lombok logging](https://projectlombok.org/features/log)
 * [Creating logger without using class name](https://stackoverflow.com/questions/5271016/java-self-static-reference)
 * [Unit tests with Mockito](https://www.vogella.com/tutorials/Mockito/article.html)
+* [Configuring logback](https://dzone.com/articles/configuring-logback-with-spring-boot)
+
 

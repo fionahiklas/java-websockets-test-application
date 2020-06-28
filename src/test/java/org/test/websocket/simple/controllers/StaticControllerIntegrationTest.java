@@ -28,4 +28,11 @@ public class StaticControllerIntegrationTest {
                 .andExpect(content().string(containsString("Connection Count")));
     }
 
+    @Test
+    public void testCanGetJavaScriptCode() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/websockets_client.js"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/javascript"));
+    }
+
 }

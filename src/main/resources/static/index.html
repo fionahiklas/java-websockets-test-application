@@ -23,7 +23,7 @@
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 console.log("Document ready, registering the handlers");
-                let websocketClient = WebSocketClient();
+                let websocketClient = new WebSocketsClient();
 
                 let connectionStatus = document.getElementById("connectionStatus");
                 let connectButton = document.getElementById("connectButton");
@@ -32,7 +32,7 @@
                     websocketClient.openWebSocket("ws://" + window.location.host + "/pingpong")
                 });
 
-                let disconnectButton = document.getElementById("connectButton");
+                let disconnectButton = document.getElementById("disconnectButton");
                 disconnectButton.addEventListener("click", function() {
                     console.log("About to disconnect the websocket");
                     websocketClient.closeWebSocket();
