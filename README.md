@@ -56,10 +56,12 @@ On doing this the two tests provided will break, just delete them.
 * [Testing spring web applications](https://spring.io/guides/gs/testing-web/)
 * [Unit testing spring boot apps](https://reflectoring.io/unit-testing-spring-boot/)
 
+
 ### WebSockets
 
 * [Browser WebSocket example](https://javascript.info/websocket)
 * [Spring WebSockets and STOMP](https://spring.io/guides/gs/messaging-stomp-websocket/)
+
 
 ### Java Management Extensions
 
@@ -79,6 +81,7 @@ On doing this the two tests provided will break, just delete them.
 * [HTML Doctype](https://www.w3schools.com/tags/tag_doctype.asp)
 * [JavaScript location](https://www.tutorialrepublic.com/javascript-tutorial/javascript-window-location.php)
 * [JavaScript load order](http://xahlee.info/js/js_executing_order.html)
+* [WebSocket JavaScript API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
 
 
 ### Java
