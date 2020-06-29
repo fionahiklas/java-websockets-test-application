@@ -1,11 +1,16 @@
 package org.test.websocket.simple.service;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;
 
-import java.util.concurrent.RunnableScheduledFuture;
+import java.util.concurrent.ScheduledFuture;
 
+@Slf4j
 @Component
 public class PingerService {
 
@@ -17,6 +22,13 @@ public class PingerService {
      * TODO: in theory cancelled tasks should get garbage collected
      */
     public static final String PINGER_FUTURE="PingerFuture";
+
+    /**
+     * The thread pool used for executing tasks
+     */
+    @Autowired
+    @Qualifier("PingerThreadPool")
+    private ThreadPoolTaskScheduler taskScheduler;
 
     /**
      * Delay between pings
@@ -38,13 +50,37 @@ public class PingerService {
      * Register a session with the pinger service such that a ping request will be
      * sent on a regular basis until the
      * @param webSocketSession
-     * @returns RunnableScheduledFuture for the given task that will execute the ping
+     * @returns ScheduledFuture for the given task that will execute the ping
      * @throws IllegalStateException if this session already has a pinger attached
      */
-    public RunnableScheduledFuture<Void> registerWebSocketSessionWithPinger(WebSocketSession webSocketSession)
+    public ScheduledFuture<?> registerWebSocketSessionWithPinger(WebSocketSession webSocketSession)
         throws IllegalStateException {
 
-        return null;
+        log.debug("Creating runner for websocket session: {}", webSocketSession);
+
+        // This should be a closure, so the webSocketSession parameter persists in the inner class
+        Runnable runner = new Runnable() {
+            @Override
+            public void run() {
+                log.debug("Calling ping for session: {}", webSocketSession.toString());
+            }
+        };
+
+        log.debug("Scheduling the runner for websocket session: {}", webSocketSession);
+        // TODO: There are potential race conditions here - when this task is scheduled it
+        // TODO: will attempt to execute immediately for a start.  The web socket may have
+        // TODO: disconnected before then.  Maybe the runner needs to handle that by checking
+        // TODO: if the session object has the future attribute set and if not, it does
+        // TODO: nothing yet?
+        // TODO: Another issue is that the act of unregistering the runner may fail because again
+        // TODO: the socket closed too soon and the code doesn't get a chance to add the
+        // TODO: future which allows the task to be cancelled.
+        // TODO: Again maybe we could add something else into the session to indicate this
+        // TODO: condition and get the runner to stop attempting pings
+        ScheduledFuture<?> future = taskScheduler.scheduleAtFixedRate(runner, scheduleRate());
+        log.debug("Runner is scheduled now");
+        webSocketSession.getAttributes().put(PINGER_FUTURE, future);
+        return future;
     }
 
     /**
@@ -59,4 +95,10 @@ public class PingerService {
         throws IllegalStateException {
 
     }
+
+    private long scheduleRate() {
+        return pingerDelay * 1000L;
+    }
+
+
 }

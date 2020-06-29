@@ -94,5 +94,5 @@ On doing this the two tests provided will break, just delete them.
 * [Creating logger without using class name](https://stackoverflow.com/questions/5271016/java-self-static-reference)
 * [Unit tests with Mockito](https://www.vogella.com/tutorials/Mockito/article.html)
 * [Configuring logback](https://dzone.com/articles/configuring-logback-with-spring-boot)
-
+* [Generics wildcards](https://docs.oracle.com/javase/tutorial/extra/generics/wildcards.html)
 
