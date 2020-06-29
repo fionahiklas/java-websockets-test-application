@@ -57,6 +57,7 @@ On doing this the two tests provided will break, just delete them.
 * [Unit testing spring boot apps](https://reflectoring.io/unit-testing-spring-boot/)
 * [Spring properties](https://www.baeldung.com/properties-with-spring)
 * [Spring value annotation](https://www.baeldung.com/spring-value-annotation)
+* [Spring TestPropertySource annotation](https://www.baeldung.com/spring-test-property-source)
 
 
 ### WebSockets
