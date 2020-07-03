@@ -17,27 +17,17 @@
 package org.test.websocket.simple;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import org.test.websocket.simple.service.HelloWorldService;
 
 @Slf4j
 @SpringBootApplication
 public class WebSocketTestApplication implements CommandLineRunner {
 
-	// Simple example shows how a command line spring application can execute an
-	// injected bean service. Also demonstrates how you can use @Value to inject
-	// command line args ('--name=whatever') or application properties
-
-	@Autowired
-	private HelloWorldService helloWorldService;
-
 	@Override
 	public void run(String... args) {
-		log.debug(this.helloWorldService.getHelloMessage());
+		log.debug("Starting application");
 	}
 
 	public static void main(String[] args) throws Exception {

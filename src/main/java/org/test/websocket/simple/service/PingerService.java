@@ -6,8 +6,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.PingMessage;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.concurrent.ScheduledFuture;
 
 @Slf4j
@@ -63,6 +67,12 @@ public class PingerService {
             @Override
             public void run() {
                 log.debug("Calling ping for session: {}", webSocketSession.toString());
+                WebSocketMessage<ByteBuffer> pingMessage = new PingMessage();
+                try {
+                    webSocketSession.sendMessage(pingMessage);
+                } catch (IOException ie) {
+                    log.warn("Error pinging websocket for session: {}", webSocketSession);
+                }
             }
         };
 
@@ -94,6 +104,13 @@ public class PingerService {
     public void unregisterWebSocketSessionWithPinger(WebSocketSession webSocketSession)
         throws IllegalStateException {
 
+        log.debug("Unregistering web socket session: {}", webSocketSession);
+        ScheduledFuture<?> future = (ScheduledFuture)webSocketSession.getAttributes().get(PINGER_FUTURE);
+
+        if (future == null) {
+            log.error("Trying to unregister a session with no pinger");
+            throw new IllegalStateException("No pinger present");
+        }
     }
 
     private long scheduleRate() {

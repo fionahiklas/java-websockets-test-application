@@ -3,6 +3,8 @@ package org.test.websocket.simple.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -10,6 +12,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.util.HashMap;
@@ -21,6 +24,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.collection.IsMapContaining.hasKey;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.any;
 
@@ -48,6 +52,10 @@ public class PingerServiceTest {
     @Mock
     private ScheduledFuture futureTwo;
 
+    @Captor
+    private ArgumentCaptor<Runnable> runnableArgumentCaptor;
+
+
     @MockBean(name="PingerThreadPool")
     private ThreadPoolTaskScheduler mockThreadPool;
 
@@ -61,7 +69,7 @@ public class PingerServiceTest {
 
 
     @Test
-    public void testRegisterSessionWithPinger() throws Exception {
+    public void testRegisterSessionWithPinger_newSession() throws Exception {
         Map<String, Object> attributes = new HashMap<>();
 
         when(sessionOne.getAttributes()).thenReturn(attributes);
@@ -71,5 +79,33 @@ public class PingerServiceTest {
         assertThat(result, notNullValue());
         assertThat(attributes, hasKey(PingerService.PINGER_FUTURE));
         assertThat(attributes.get(PingerService.PINGER_FUTURE), equalTo(futureOne));
+    }
+
+    @Test
+    public void testRegisterSessionWithPinger_runnerCallsWebSocketPing() throws Exception {
+        Map<String, Object> attributes = new HashMap<>();
+
+        when(sessionOne.getAttributes()).thenReturn(attributes);
+        when(mockThreadPool.scheduleAtFixedRate(any(Runnable.class), eq(1000L))).thenReturn(futureOne);
+
+        ScheduledFuture<?> result = pingerService.registerWebSocketSessionWithPinger(sessionOne);
+
+        verify(mockThreadPool).scheduleAtFixedRate(runnableArgumentCaptor.capture(), eq(1000L));
+
+        Runnable scheduledRunnable = runnableArgumentCaptor.getValue();
+        assertThat(scheduledRunnable, notNullValue());
+
+        scheduledRunnable.run();
+        verify(sessionOne).sendMessage(any(WebSocketMessage.class));
+    }
+
+    @Test(expected=IllegalStateException.class)
+    public void testUnregisterSessionWithPinger_noSessionPresent() throws Exception {
+        Map<String, Object> attributes = new HashMap<>();
+
+        when(sessionOne.getAttributes()).thenReturn(attributes);
+
+        // Should throw an exception as there is no session present
+        pingerService.unregisterWebSocketSessionWithPinger(sessionOne);
     }
 }

@@ -5,6 +5,20 @@ Test bed for WebSockets application
 
 ## Getting Started
 
+### Running tests
+
+```
+mvn clean test
+```
+
+
+### Test Coverage
+
+```
+mvn clean verify
+```
+
+
 ### Running the Application
 
 ```
@@ -95,4 +109,5 @@ On doing this the two tests provided will break, just delete them.
 * [Unit tests with Mockito](https://www.vogella.com/tutorials/Mockito/article.html)
 * [Configuring logback](https://dzone.com/articles/configuring-logback-with-spring-boot)
 * [Generics wildcards](https://docs.oracle.com/javase/tutorial/extra/generics/wildcards.html)
-
+* [Coverage with JaCoCo](https://mkyong.com/maven/maven-jacoco-code-coverage-example/)
+* [Mockito annotations](https://www.baeldung.com/mockito-annotations)
