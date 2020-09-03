@@ -119,6 +119,9 @@ public class PingerService {
             log.error("Trying to unregister a session with no pinger");
             throw new IllegalStateException("No pinger present");
         }
+
+        log.debug("Cancelling pinger service future for session: {}", webSocketSession);
+        future.cancel(true);
     }
 
     private long scheduleRate() {
