@@ -26,6 +26,29 @@
                 let websocketClient = new WebSocketsClient();
 
                 let connectionStatus = document.getElementById("connectionStatus");
+                let messageResponse = document.getElementById("messageResponse");
+                websocketClient.registerListeners({
+                    open: function() {
+                        console.log("Open listener function called");
+                        connectionStatus = "OPEN";
+                    },
+
+                    close: function() {
+                        console.log("Close listener function called");
+                        connectionStatus.innerText = "CLOSED";
+                    },
+
+                    error: function(error) {
+                        console.log("ERROR listener called: ", error);
+                    },
+
+                    message: function(message) {
+                        console.log("Message listener called with message: ", message)
+                        messageResponse.value += message;
+                    }
+                })
+
+
                 let connectButton = document.getElementById("connectButton");
                 connectButton.addEventListener("click", function() {
                     console.log("About to connect to websocket");
@@ -41,8 +64,8 @@
                 let submitMessageButton = document.getElementById("submitMessageButton");
                 let messageOut = document.getElementById("messageOut");
                 submitMessageButton.addEventListener("click", function() {
-                   console.log("Sending message: ", messageOut);
-                   websocketClient.sendMessage(messageOut.innerText);
+                   console.log("Sending message: ", messageOut.value);
+                   websocketClient.sendMessage(messageOut.value);
                 });
 
                 console.log("All done.");

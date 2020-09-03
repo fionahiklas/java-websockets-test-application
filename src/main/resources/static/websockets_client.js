@@ -10,38 +10,43 @@ let extend = WebSocketsClient.prototype;
 console.log("Extending prototype");
 
 extend.openWebSocket = function(websocketURL) {
+    // When the socket handler functions ate called "this" refers to the
+    // WebSocket object, we need to refer to the WebSocketsClient object
+    // so we set that up as "self"
+    const self = this;
+
     console.log("Creating websocket for URL: ", websocketURL);
     this.socket = new WebSocket(websocketURL);
 
     this.socket.onopen = function(event) {
         console.log("Connection opened");
-        if (this.listeners && this.listeners.open) {
+        if (self.listeners && self.listeners.open) {
             console.log("Calling open listener");
-            this.listeners.open();
+            self.listeners.open();
         }
     };
 
     this.socket.onclose = function(event) {
         console.log("Connection closes");
-        if (this.listeners && this.listeners.close) {
+        if (self.listeners && self.listeners.close) {
             console.log("Calling close listener");
-            this.listeners.close();
+            self.listeners.close();
         }
     }
 
     this.socket.onerror = function(event) {
         console.log("Websocket error: ", event.message);
-        if (this.listeners && this.listeners.error) {
+        if (self.listeners && self.listeners.error) {
             console.log("Calling error listener");
-            this.listeners.error(event.message);
+            self.listeners.error(event.message);
         }
     }
 
     this.socket.onmessage = function(event) {
         console.log("Received message: ", event.data);
-        if (this.listeners && this.listeners.message) {
+        if (self.listeners && self.listeners.message) {
             console.log("Calling message listener");
-            this.listeners.message(event.data);
+            self.listeners.message(event.data);
         }
     }
 }

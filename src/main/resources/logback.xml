@@ -8,6 +8,6 @@
     <root level="info">
         <appender-ref ref="STDOUT" />
     </root>
-    <logger name="org.test.websocket.simple" level="debug">
+    <logger name="uk.co.hiklas.websocket.simple" level="debug">
     </logger>
 </configuration>

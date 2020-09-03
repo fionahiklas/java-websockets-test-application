@@ -19,7 +19,7 @@ public class PingPongWebSocketHandler extends TextWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        log.debug("Handle Text Message");
+        log.debug("Handle Text Message: {}", message.getPayload());
     }
 
     @Override
