@@ -30,7 +30,7 @@
                 websocketClient.registerListeners({
                     open: function() {
                         console.log("Open listener function called");
-                        connectionStatus = "OPEN";
+                        connectionStatus.innerText = "OPEN";
                     },
 
                     close: function() {
