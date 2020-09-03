@@ -1,5 +1,6 @@
 package uk.co.hiklas.websocket.simple.websockets;
 
+import io.micrometer.core.instrument.DistributionSummary;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,6 +8,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.PongMessage;
@@ -14,6 +16,10 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import uk.co.hiklas.websocket.simple.service.PingerService;
 
+import java.nio.ByteBuffer;
+
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.times;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,9 +36,15 @@ public class PingPongWebSocketHandlerTest {
     @Mock
     private PingerService mockPingerService;
 
+    @Mock
+    @Qualifier("pingTime")
+    private DistributionSummary mockDistributionSummary;
+
     @Captor
     private ArgumentCaptor<WebSocketSession> webSocketSessionArgumentCaptor;
 
+    @Captor
+    private ArgumentCaptor<Double> recordArgumentCaptor;
 
     @InjectMocks
     private PingPongWebSocketHandler webSocketHandler;
@@ -40,8 +52,15 @@ public class PingPongWebSocketHandlerTest {
 
     @Test
     public void testHandlePongMessage() throws Exception {
-        PongMessage testPongMessage = new PongMessage();
+        Long currentTimestamp = System.currentTimeMillis();
+        PongMessage testPongMessage = createPongMessage(currentTimestamp);
+
         webSocketHandler.handlePongMessage(mockWebSocketSession, testPongMessage);
+        verify(mockDistributionSummary, times(1)).record(recordArgumentCaptor.capture());
+
+        Double recordValue = recordArgumentCaptor.getValue();
+        assertThat(recordValue, greaterThanOrEqualTo(Double.valueOf(0)));
+        assertThat(recordValue, lessThanOrEqualTo(Double.valueOf(100000)));
     }
 
     @Test
@@ -70,5 +89,11 @@ public class PingPongWebSocketHandlerTest {
                 .unregisterWebSocketSessionWithPinger(webSocketSessionArgumentCaptor.capture());
         assertThat(webSocketSessionArgumentCaptor.getValue(), equalTo(mockWebSocketSession));
     }
-    
+
+    private PongMessage createPongMessage(Long payload) {
+        ByteBuffer payloadBuffer = ByteBuffer.allocate(Long.BYTES);
+        payloadBuffer.putLong(payload);
+        payloadBuffer.flip();
+        return new PongMessage(payloadBuffer);
+    }
 }

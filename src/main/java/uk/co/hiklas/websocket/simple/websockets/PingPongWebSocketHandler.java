@@ -1,7 +1,9 @@
 package uk.co.hiklas.websocket.simple.websockets;
 
+import io.micrometer.core.instrument.DistributionSummary;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.PongMessage;
@@ -17,9 +19,18 @@ public class PingPongWebSocketHandler extends TextWebSocketHandler {
     @Autowired
     private PingerService pingerService;
 
+    @Autowired
+    @Qualifier("pingTime")
+    private DistributionSummary pingTimeMetricRecorder;
+
     @Override
     protected void handlePongMessage(WebSocketSession session, PongMessage message) throws Exception {
-        log.debug("Handle Pong Message");
+        long currentTimestamp = System.currentTimeMillis();
+        long messageTimestamp = message.getPayload().getLong();
+        long pingTime = currentTimestamp - messageTimestamp;
+        log.debug("Handle Pong Message: {}, ping time: {}", messageTimestamp, pingTime);
+
+        pingTimeMetricRecorder.record(pingTime);
     }
 
     @Override

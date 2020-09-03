@@ -27,6 +27,17 @@ mvn clean spring-boot:run
 
 The application listens on port 8080 by default
 
+Get a list of mappings from Spring actuator
+
+```
+curl http://localhost:8080/actuator/mappings | json_pp | less
+```
+
+Get the metrics for prometheus
+
+```
+curl http://localhost:8080/actuator/prometheus
+```
 
 ## Setup
 
@@ -73,7 +84,15 @@ On doing this the two tests provided will break, just delete them.
 * [Spring value annotation](https://www.baeldung.com/spring-value-annotation)
 * [Spring TestPropertySource annotation](https://www.baeldung.com/spring-test-property-source)
 * [Sprint Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html)
-* []
+
+### Metrics
+
+* [Micrometer](https://www.baeldung.com/micrometer)
+* [Spring and MicroMeter](https://spring.io/blog/2018/03/16/micrometer-spring-boot-2-s-new-application-metrics-collector)
+* [Spring Micrometer registry customisation](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-metrics-getting-started)
+* [Prometheus docker container](https://hub.docker.com/r/prom/prometheus/)
+
+
 
 ### WebSockets
 
