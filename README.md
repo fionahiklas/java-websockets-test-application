@@ -2,8 +2,27 @@
 
 Test bed for WebSockets application
 
+## Prerequisites
+
+### ActiveMQ
+
+Before you run the application up fully it needs to be able to connect to the 
+STOMP port on an ActiveMQ instance
+
 
 ## Getting Started
+
+### Starting ActiveMQ
+
+Using the docker container
+
+```
+docker run -p 61613:61613 -p 8161:8161 \
+           -v $PWD/activemq/conf:/opt/activemq/conf \
+           -v $PWD/activemq/data:/opt/activemq/data \
+           rmohr/activemq:5.15.9
+```
+
 
 ### Running tests
 
@@ -61,6 +80,19 @@ output to be one level up it effectively uses the current working directory if i
 Also the template project needs the Spring Boot version increasing to, in this case, `2.3.1.RELEASE`.  
 On doing this the two tests provided will break, just delete them.
 
+
+## Notes
+
+### Setting up default ActiveMQ config
+
+According to the [Docker hub page](https://hub.docker.com/r/rmohr/activemq) run the following command
+
+```
+docker run --user root --rm -ti \
+  -v $PWD/activemq/conf:/mnt/conf \
+  -v $PWD/activemq/data:/mnt/data \
+  rmohr/activemq:5.15.4-alpine /bin/sh
+```
 
 ## References
 

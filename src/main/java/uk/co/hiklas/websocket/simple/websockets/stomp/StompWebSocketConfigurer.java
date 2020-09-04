@@ -12,7 +12,8 @@ public class StompWebSocketConfigurer implements WebSocketMessageBrokerConfigure
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry messageBrokerRegistry) {
-        messageBrokerRegistry.enableStompBrokerRelay("/topic/yall", "/user/mytasks");
+        messageBrokerRegistry
+            .enableStompBrokerRelay("/topic/yall", "/user/mytasks");
     }
 
     @Override
