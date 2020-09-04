@@ -94,6 +94,11 @@ docker run --user root --rm -ti \
   rmohr/activemq:5.15.4-alpine /bin/sh
 ```
 
+You can then copy files from the internal conf and data directories across to the mounted directories.
+In actual fact nothing needs copying from the data directory.
+
+
+
 ## References
 
 ### Maven
