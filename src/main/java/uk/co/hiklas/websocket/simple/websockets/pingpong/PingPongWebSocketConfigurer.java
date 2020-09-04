@@ -1,4 +1,4 @@
-package uk.co.hiklas.websocket.simple.websockets;
+package uk.co.hiklas.websocket.simple.websockets.pingpong;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

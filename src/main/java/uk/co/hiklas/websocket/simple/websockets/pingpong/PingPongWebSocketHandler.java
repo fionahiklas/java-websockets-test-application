@@ -1,4 +1,4 @@
-package uk.co.hiklas.websocket.simple.websockets;
+package uk.co.hiklas.websocket.simple.websockets.pingpong;
 
 import io.micrometer.core.instrument.DistributionSummary;
 import lombok.extern.slf4j.Slf4j;

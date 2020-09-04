@@ -1,4 +1,4 @@
-package uk.co.hiklas.websocket.simple.websockets;
+package uk.co.hiklas.websocket.simple.websockets.pingpong;
 
 import java.util.Map;
 import java.util.HashMap;

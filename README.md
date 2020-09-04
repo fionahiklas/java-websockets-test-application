@@ -84,6 +84,7 @@ On doing this the two tests provided will break, just delete them.
 * [Spring value annotation](https://www.baeldung.com/spring-value-annotation)
 * [Spring TestPropertySource annotation](https://www.baeldung.com/spring-test-property-source)
 * [Sprint Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html)
+* [Sprint Qualifier](http://zetcode.com/springboot/qualifier/)
 
 ### Metrics
 
@@ -98,7 +99,12 @@ On doing this the two tests provided will break, just delete them.
 
 * [Browser WebSocket example](https://javascript.info/websocket)
 * [Spring WebSockets and STOMP](https://spring.io/guides/gs/messaging-stomp-websocket/)
+* [Spring reference websockets and STOMP](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html#websocket-stomp)
 
+
+### ActiveMQ/Messaging
+
+* 
 
 ### Java Management Extensions
 

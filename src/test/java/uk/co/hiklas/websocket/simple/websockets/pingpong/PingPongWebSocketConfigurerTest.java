@@ -1,4 +1,4 @@
-package uk.co.hiklas.websocket.simple.websockets;
+package uk.co.hiklas.websocket.simple.websockets.pingpong;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistration;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
