@@ -58,7 +58,7 @@ Get the metrics for prometheus
 curl http://localhost:8080/actuator/prometheus
 ```
 
-## Setup
+## Notes
 
 ### Creation from Archetype
 
@@ -81,8 +81,6 @@ Also the template project needs the Spring Boot version increasing to, in this c
 On doing this the two tests provided will break, just delete them.
 
 
-## Notes
-
 ### Setting up default ActiveMQ config
 
 According to the [Docker hub page](https://hub.docker.com/r/rmohr/activemq) run the following command
@@ -96,6 +94,21 @@ docker run --user root --rm -ti \
 
 You can then copy files from the internal conf and data directories across to the mounted directories.
 In actual fact nothing needs copying from the data directory.
+
+
+### Setting up the Ruby client code
+
+Create Gemfile with gem source 
+
+```
+source 'https://rubygems.org'
+```
+
+Adding gems needed to develop the code
+
+```
+bundle add stomp
+```
 
 
 
@@ -141,7 +154,9 @@ In actual fact nothing needs copying from the data directory.
 
 ### ActiveMQ/Messaging
 
-* 
+* [ActiveMQ Docker image](https://hub.docker.com/r/rmohr/activemq)
+* [ActiveMQ Security](https://activemq.apache.org/security)
+
 
 ### Java Management Extensions
 
