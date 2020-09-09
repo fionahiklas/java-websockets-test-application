@@ -171,12 +171,15 @@ bundle add stomp
 * [Spring JMX](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/jmx.html#jmx-interface-metadata)
 
  
-### HTML
+### HTML/Frontend
 
 * [HTML Doctype](https://www.w3schools.com/tags/tag_doctype.asp)
 * [JavaScript location](https://www.tutorialrepublic.com/javascript-tutorial/javascript-window-location.php)
 * [JavaScript load order](http://xahlee.info/js/js_executing_order.html)
 * [WebSocket JavaScript API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket)
+* [Webjars JavaScript libraries packaged as Jar files](https://www.webjars.org)
+* [Stomp WebSocket jar](https://github.com/webjars/stomp-websocket)
+* [Stomp Websocket API](https://github.com/jmesnil/stomp-websocket)
 
 
 ### Java

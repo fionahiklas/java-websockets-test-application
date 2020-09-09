@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
+import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import java.util.List;
 
@@ -28,6 +29,9 @@ public class StompWebSocketConfigurerTest {
 
     @Mock
     private StompEndpointRegistry mockStompEndpointRegistry;
+
+    @Mock
+    private StompHandshakeInterceptor mockStompHandshakeInterceptor;
 
     @Captor
     private ArgumentCaptor<String> relayNamesArgumentCaptor;

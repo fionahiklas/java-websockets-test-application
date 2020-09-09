@@ -6,19 +6,37 @@
     </head>
     <body>
         <h1>WebSockets Test Page</h1>
-        <div>Connection Count</div><div id="count"></div>
+        <div id="websocket">
+            <div>Connection Count</div><div id="count"></div>
 
-        <h1>Messages</h1>
-        <div>
-            <button id="connectButton">Connect</button>
-            <button id="disconnectButton">Disconnect</button>
-            <p>Status: <div id="connectionStatus"></div></p>
+            <h1>Messages</h1>
+            <div>
+                <button id="textConnectButton">Connect</button>
+                <button id="textDisconnectButton">Disconnect</button>
+                <p>Status: <div id="textConnectionStatus"></div></p>
+            </div>
+            <div>
+                <textarea id="textMessageOut"></textarea>
+                <button id="textSubmitMessageButton">Submit</button>
+                <textarea id="textMessageResponse"></textarea>
+            </div>
         </div>
-        <div>
-            <textarea id="messageOut"></textarea>
-            <button id="submitMessageButton">Submit</button>
-            <textarea id="messageResponse"></textarea>
+
+        <div id="stomp">
+
+            <h1>STOMP</h1>
+            <div>
+                <button id="stompConnectButton">Connect</button>
+                <button id="stompDisconnectButton">Disconnect</button>
+                <p>Status: <div id="stompConnectionStatus"></div></p>
+            </div>
+            <div>
+                <textarea id="stompMessageOut"></textarea>
+                <button id="stompSubmitMessageButton">Submit</button>
+                <textarea id="stompMessageResponse"></textarea>
+            </div>
         </div>
+        
 
         <script>
             document.addEventListener('DOMContentLoaded', function(){
@@ -49,19 +67,19 @@
                 })
 
 
-                let connectButton = document.getElementById("connectButton");
+                let connectButton = document.getElementById("textConnectButton");
                 connectButton.addEventListener("click", function() {
                     console.log("About to connect to websocket");
                     websocketClient.openWebSocket("ws://" + window.location.host + "/pingpong")
                 });
 
-                let disconnectButton = document.getElementById("disconnectButton");
+                let disconnectButton = document.getElementById("textDisconnectButton");
                 disconnectButton.addEventListener("click", function() {
                     console.log("About to disconnect the websocket");
                     websocketClient.closeWebSocket();
                 });
 
-                let submitMessageButton = document.getElementById("submitMessageButton");
+                let submitMessageButton = document.getElementById("textSubmitMessageButton");
                 let messageOut = document.getElementById("messageOut");
                 submitMessageButton.addEventListener("click", function() {
                    console.log("Sending message: ", messageOut.value);
