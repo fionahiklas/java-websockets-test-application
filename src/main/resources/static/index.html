@@ -64,7 +64,7 @@
 
                     let loginRequest = new XMLHttpRequest();
                     loginRequest.open("POST", "/login");
-                    loginRequest.setRequestHeader("MyNameIs", "Inigo Montoya");
+                    loginRequest.setRequestHeader("X-MyNameIs", "Inigo Montoya");
                     loginRequest.onload = function() {
                         console.log("Login request completed: ", loginRequest);
                     };

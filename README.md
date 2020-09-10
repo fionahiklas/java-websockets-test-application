@@ -122,7 +122,7 @@ bundle add stomp
 * [Spring boot maven plugin](https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/html/)
 
 
-### Spring Boot
+### Spring
 
 * [Spring API documentation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/s)
 * [Spring boot example](https://spring.io/guides/gs/spring-boot/)
@@ -135,6 +135,10 @@ bundle add stomp
 * [Spring TestPropertySource annotation](https://www.baeldung.com/spring-test-property-source)
 * [Sprint Boot Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html)
 * [Sprint Qualifier](http://zetcode.com/springboot/qualifier/)
+* [Spring REST annotations](https://www.baeldung.com/spring-boot-json)
+* [Setting cookies with Spring ResponseEntity](https://attacomsian.com/blog/set-cookie-with-response-entity-in-spring-boot)
+* [Using Spring ResponseCookie](http://zetcode.com/spring/cookies/)
+
 
 ### Metrics
 
