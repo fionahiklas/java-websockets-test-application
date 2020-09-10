@@ -16,11 +16,13 @@ public class PingPongWebSocketInterceptor implements HandshakeInterceptor {
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
         log.debug("Before handshake");
+        log.debug("Before handshake, headers: ", request.getHeaders());
         return true;
     }
 
     @Override
     public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
         log.debug("After handshake");
+        log.debug("After handshake, headers: ", request.getHeaders());
     }
 }

@@ -6,6 +6,19 @@
     </head>
     <body>
         <h1>WebSockets Test Page</h1>
+
+        <div id="login">
+            <div>
+                <div>Login:</div>
+                <div><button id="loginButton">Login</button></div>
+            </div>
+
+            <div>
+                <div>Monitor:</div>
+                <div><button id="monitorButton">Monitor</button></div>
+            </div>
+        </div>
+
         <div id="websocket">
             <div>Connection Count</div><div id="count"></div>
 
@@ -41,6 +54,43 @@
         <script>
             document.addEventListener('DOMContentLoaded', function(){
                 console.log("Document ready, registering the handlers");
+
+                // Set a cookie
+                document.cookie = 'X-MyCookie=WIBBLE12345;path=/';
+
+                let loginButton = document.getElementById("loginButton");
+                loginButton.addEventListener("click", function() {
+                    console.log("Login button clicked");
+
+                    let loginRequest = new XMLHttpRequest();
+                    loginRequest.open("POST", "/login");
+                    loginRequest.setRequestHeader("MyNameIs", "Inigo Montoya");
+                    loginRequest.onload = function() {
+                        console.log("Login request completed: ", loginRequest);
+                    };
+                    loginRequest.onerror = function() {
+                        console.log("Login request error: ", loginRequest);
+                    }
+                    loginRequest.send();
+                });
+
+                let monitorButton = document.getElementById("monitorButton");
+                monitorButton.addEventListener("click", function() {
+                    console.log("Monitor button clicked");
+
+                    let monitorRequest = new XMLHttpRequest();
+                    monitorRequest.open("GET", "/monitor");
+                    monitorRequest.setRequestHeader("MyNameIs", "Fezzik");
+                    monitorRequest.onload = function() {
+                        console.log("Monitor request completed: ", monitorRequest);
+                    };
+                    monitorRequest.onerror = function() {
+                        console.log("Monitor request error: ", monitorRequest);
+                    }
+                    monitorRequest.send();
+                });
+
+
                 let websocketClient = new WebSocketsClient();
 
                 let connectionStatus = document.getElementById("connectionStatus");
