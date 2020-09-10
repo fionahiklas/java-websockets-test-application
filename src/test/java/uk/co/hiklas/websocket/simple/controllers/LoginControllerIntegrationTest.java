@@ -27,4 +27,32 @@ public class LoginControllerIntegrationTest {
                 .andExpect(content().string(containsString("Mr Nutt")))
                 .andExpect(cookie().exists(LoginController.FROMLOGIN_COOKIE));
     }
+
+    @Test
+    public void testLoginReturnsHandlesEmptyHeaderAndCookie() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/login"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(cookie().exists(LoginController.FROMLOGIN_COOKIE))
+                .andExpect(cookie().value(LoginController.FROMLOGIN_COOKIE, containsString("Wibble")));
+    }
+
+    @Test
+    public void testLoginDoesNotReturnsUsernameCookieForEmptyHeader() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/login"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(cookie().doesNotExist(LoginController.USERNAME_COOKIE));
+    }
+
+    @Test
+    public void testLoginReturnsUsernameCookieWhenHeaderPresent() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.post("/login").header(LoginController.MYNAMEIS_HEADER, "Glenda Sugarbean"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(cookie().exists(LoginController.USERNAME_COOKIE))
+                .andExpect(cookie().value(LoginController.USERNAME_COOKIE, "GlendaSugarbean"));
+    }
+
+
 }
