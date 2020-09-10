@@ -15,11 +15,12 @@ public class StompHandshakeInterceptor implements HandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
-        return false;
+        log.debug("STOMP Before handshake call");
+        return true;
     }
 
     @Override
     public void afterHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Exception e) {
-
+        log.debug("STOMP After handshake call");
     }
 }

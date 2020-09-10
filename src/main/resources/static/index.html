@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="websockets_client.js"></script>
+        <script src="/websockets_client.js"></script>
+        <script src="/webjars/stomp-websocket/2.3.3-1/stomp.js"></script>
         <title>WebSockets Test Page</title>
     </head>
     <body>
@@ -55,8 +56,9 @@
             document.addEventListener('DOMContentLoaded', function(){
                 console.log("Document ready, registering the handlers");
 
-                // Set a cookie
-                document.cookie = 'X-MyCookie=WIBBLE12345;path=/';
+                /* ************ */
+                /* * LOGIN CODE */
+                /* ************ */
 
                 let loginButton = document.getElementById("loginButton");
                 loginButton.addEventListener("click", function() {
@@ -91,10 +93,13 @@
                 });
 
 
-                let websocketClient = new WebSocketsClient();
+                /* **************** */
+                /* * WEBSOCKET CODE */
+                /* **************** */
 
-                let connectionStatus = document.getElementById("connectionStatus");
-                let messageResponse = document.getElementById("messageResponse");
+                let websocketClient = new WebSocketsClient();
+                let connectionStatus = document.getElementById("textConnectionStatus");
+                let messageResponse = document.getElementById("textMessageResponse");
                 websocketClient.registerListeners({
                     open: function() {
                         console.log("Open listener function called");
@@ -116,7 +121,6 @@
                     }
                 })
 
-
                 let connectButton = document.getElementById("textConnectButton");
                 connectButton.addEventListener("click", function() {
                     console.log("About to connect to websocket");
@@ -134,6 +138,40 @@
                 submitMessageButton.addEventListener("click", function() {
                    console.log("Sending message: ", messageOut.value);
                    websocketClient.sendMessage(messageOut.value);
+                });
+
+                /* ************ */
+                /* * STOMP CODE */
+                /* ************ */
+
+                let stompConnectButton = document.getElementById("stompConnectButton");
+                let stompMessageResponse = document.getElementById("stompMessageResponse");
+                var stompClient = null;
+
+                stompConnectButton.addEventListener("click", function() {
+                    console.log("Connecting to STOMP over WS");
+                    stompClient = Stomp.client("ws://" + window.location.host + "/ankh");
+                    stompClient.connect({ "X-FredHeader": "Alice"}, function (frame) {
+                        console.log("Connected to STOMP connection, frame: ", frame);
+                        stompClient.subscribe("/topic/discworld/ankh", function(message) {
+                            console.log("Got message from broker: ", message);
+                            stompMessageResponse.value += message.body
+                        });
+                    },
+                    function (error) {
+                        console.log("Error from STOMP connect: ", error);
+                    });
+                });
+
+                let stompSubmitButton = document.getElementById("stompSubmitMessageButton");
+                let stompMessageOut = document.getElementById("stompMessageOut");
+                stompSubmitButton.addEventListener("click", function() {
+                    if(stompClient!=null && stompClient.connected == true) {
+                        console.log("Sending message over STOMP: ", stompMessageOut.value);
+                        stompClient.send("/topic/discworld/ankh", {}, stompMessageOut.value);
+                    } else {
+                        console.log("NOT sending message over STOMP");
+                    }
                 });
 
                 console.log("All done.");

@@ -66,7 +66,7 @@ public class StompWebSocketConfigurerTest {
         List<String> relayNames = relayNamesArgumentCaptor.getAllValues();
 
         assertThat(relayNames.size(), greaterThan(0));
-        assertThat(relayNames, hasItem("/topic/yall"));
+        assertThat(relayNames, hasItem("/topic/discworld"));
         assertThat(relayNames, hasItem("/user/mytasks"));
     }
 
