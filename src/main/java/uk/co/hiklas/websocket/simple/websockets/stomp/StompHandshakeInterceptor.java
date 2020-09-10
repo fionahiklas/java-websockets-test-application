@@ -15,7 +15,7 @@ public class StompHandshakeInterceptor implements HandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
-        log.debug("STOMP Before handshake call");
+        log.debug("STOMP Before handshake call, headers: {}", serverHttpRequest.getHeaders());
         return true;
     }
 
