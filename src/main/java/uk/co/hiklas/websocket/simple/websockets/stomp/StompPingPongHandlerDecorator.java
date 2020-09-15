@@ -2,8 +2,7 @@ package uk.co.hiklas.websocket.simple.websockets.stomp;
 
 import io.micrometer.core.instrument.DistributionSummary;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.PongMessage;
 import org.springframework.web.socket.WebSocketHandler;
@@ -15,15 +14,15 @@ import uk.co.hiklas.websocket.simple.service.PingerService;
 @Slf4j
 public class StompPingPongHandlerDecorator extends WebSocketHandlerDecorator {
 
-    @Autowired
     private PingerService pingerService;
 
-    @Autowired
-    @Qualifier("pingTime")
     private DistributionSummary pingTimeMetricRecorder;
 
-    public StompPingPongHandlerDecorator(WebSocketHandler delegate) {
+    public StompPingPongHandlerDecorator(WebSocketHandler delegate, PingerService pingerService, DistributionSummary pingTimeMetricRecorder) {
         super(delegate);
+        this.pingerService = pingerService;
+        this.pingTimeMetricRecorder = pingTimeMetricRecorder;
+
         log.debug("StompPingPongHandlerDecorator constructor called, delegate type: {}", delegate.getClass().toString());
     }
 
