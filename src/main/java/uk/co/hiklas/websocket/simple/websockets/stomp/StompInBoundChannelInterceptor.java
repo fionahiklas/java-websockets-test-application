@@ -13,7 +13,13 @@ public class StompInBoundChannelInterceptor implements ChannelInterceptor {
 
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
-        log.debug("StompMessageInterceptor, message: {}", message, message.getPayload());
+        log.debug("StompMessageInterceptor - preSend, message: {}, {}", message, message.getPayload());
+        return message;
+    }
+
+    @Override
+    public Message<?> postReceive(Message<?> message, MessageChannel channel) {
+        log.debug("StompMessageInterceptor - postReceive, message: {}, {}", message, message.getPayload());
         return message;
     }
 }

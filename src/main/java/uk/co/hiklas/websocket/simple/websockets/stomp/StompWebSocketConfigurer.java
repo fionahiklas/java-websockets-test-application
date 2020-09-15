@@ -7,6 +7,7 @@ import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration;
 
 @Configuration
 @EnableWebSocketMessageBroker
@@ -18,10 +19,14 @@ public class StompWebSocketConfigurer implements WebSocketMessageBrokerConfigure
     @Autowired
     private StompInBoundChannelInterceptor stompInBoundChannelInterceptor;
 
+    @Autowired
+    private StompPingPongHandlerDecoratorFactory stompPingPongHandlerDecoratorFactory;
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry messageBrokerRegistry) {
         messageBrokerRegistry
                 .enableStompBrokerRelay("/topic/discworld", "/user/mytasks");
+
     }
 
     @Override
@@ -37,5 +42,11 @@ public class StompWebSocketConfigurer implements WebSocketMessageBrokerConfigure
                 .interceptors(stompInBoundChannelInterceptor)
                 .taskExecutor()
                 .corePoolSize(2);
+    }
+
+    @Override
+    public void configureWebSocketTransport(WebSocketTransportRegistration transportRegistry) {
+        transportRegistry
+                .addDecoratorFactory(stompPingPongHandlerDecoratorFactory);
     }
 }
