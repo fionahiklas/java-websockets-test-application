@@ -110,6 +110,31 @@ Adding gems needed to develop the code
 bundle add stomp
 ```
 
+### Ruby client in IRB
+
+Some notes on running a simple chunk of ruby code in IRB
+
+Run the IRB console with bundle so that it picks up the packages
+
+```shell script
+bundle console
+```
+
+```ruby
+require 'stomp'
+
+# See activemq/users.properties
+clientHash = { hosts: [ { login: 'fred', passcode: 'password1', host: '127.0.0.1', port: 61613, ssl: false } ] }
+
+# Connect to the ActiveMQ broker
+client = Stomp::Client.new(clientHash)
+
+client.subscribe("/topic/discworld/ankh") do |msg|
+  puts "Discworld message: #{msg}"
+end
+
+client.publish("/topic/discworld/ankh", "Hello there!")
+```
 
 
 ## References
