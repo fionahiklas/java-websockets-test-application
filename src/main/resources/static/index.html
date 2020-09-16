@@ -163,6 +163,19 @@
                     });
                 });
 
+                let stompDisconnectButton = document.getElementById("stompDisconnectButton");
+                stompDisconnectButton.addEventListener("click", function() {
+                    console.log("Attempting to disconnect from STOMP over WS")
+                    if (stompClient == null) {
+                        console.log("No STOMP client, nothing to do to disconnect");
+                    } else {
+                        console.log("Triggering disconnect from STOMP");
+                        stompClient.disconnect()
+                        stompClient = null;
+                    }
+                });
+
+
                 let stompSubmitButton = document.getElementById("stompSubmitMessageButton");
                 let stompMessageOut = document.getElementById("stompMessageOut");
                 stompSubmitButton.addEventListener("click", function() {
